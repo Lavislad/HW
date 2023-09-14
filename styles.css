@@ -19,10 +19,18 @@ h1 {
     margin-bottom: 60px;
     padding-bottom: 60px;
     padding-left: 20px;
+    box-shadow: 5px 2px 2px green;
 }
 
 .paragraph-3 {
     font-weight: bold;
     font-size: 22px;
     font-family: Courier New;
+}
+
+.paragraph-4 {
+    font-size: 24px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
