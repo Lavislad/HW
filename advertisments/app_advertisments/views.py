@@ -15,3 +15,9 @@ def advertisement_post(request):
 
 def advertisement(request):
     return render(request, 'advertisement.html')
+
+def login(request):
+    return render(request, 'login.html')
+
+def profile(request):
+    return render(request, 'profile.html')
