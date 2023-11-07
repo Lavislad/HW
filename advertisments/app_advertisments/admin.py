@@ -1,15 +1,18 @@
+from django.conf import settings
 from django.contrib import admin
+from django.utils.html import format_html
 from .models import Advertisement
 
+
 class AdvertisementAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'description', 'price', 'updated_date', 'created_date', 'auction']
+    list_display = ['id', 'title', 'description', 'price', 'updated_date', 'created_date', 'auction', 'image', 'display_thumbnail_image']
     list_filter = ['auction', 'created_at']
     actions = ['make_auction_as_false', 'make_auction_as_true']
     fieldsets = (
         ("Общее", {
-            'fields': ('title', 'description')
+            'fields': ('title', 'description', 'image')
         }),
-        ("Фианансы", {
+        ("Финансы", {
             'fields': ('price', 'auction')
         })
     )
@@ -22,4 +25,17 @@ class AdvertisementAdmin(admin.ModelAdmin):
     def make_auction_as_true(self, request, queryset):
         queryset.update(auction=True)
 
+    def save_model(self, request, obj, form, change):
+        if not obj.user:
+            obj.user = request.user
+        obj.save()
+
+    def display_thumbnail_image(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="50" height="50" />', obj.image.url)
+        else:
+            default_image_url = settings.STATIC_URL + 'img/adv.png'
+            return format_html('<img src="{}" width="50" height="50" />', default_image_url)
+
+    display_thumbnail_image.short_description = 'Thumbnail Image'
 admin.site.register(Advertisement, AdvertisementAdmin)
