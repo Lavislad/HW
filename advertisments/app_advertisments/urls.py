@@ -9,7 +9,7 @@ from .views import profile
 
 #Ссылки на страницы
 urlpatterns = [
-    path('', index),
+    path('', index, name='main-page'),
     path('top-sellers.html', top_sellers),
     path('register.html', register),
     path('advertisement-post.html', advertisement_post),
