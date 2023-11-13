@@ -6,6 +6,7 @@ from .views import advertisement_post
 from .views import advertisement
 from .views import login
 from .views import profile
+from .views import advertisement_detail
 
 #Ссылки на страницы
 urlpatterns = [
@@ -16,4 +17,5 @@ urlpatterns = [
     path('advertisement.html', advertisement),
     path('login.html', login),
     path('profile.html', profile),
+    path('advertisement/<int:pk>', advertisement_detail, name='adv-detail')
 ]

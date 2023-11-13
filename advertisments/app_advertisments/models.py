@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.html import format_html
 from django.utils import timezone
+from django.urls import reverse
 
 User = get_user_model()
 
@@ -53,3 +54,6 @@ class Advertisement(models.Model):
                 '<span style="color: orange; font-weight: bold;">Сегодня в {}</span>', updated_time
             )
         return self.created_at.strftime('%d.%m.%Y в %H:%M:%S')
+
+    def get_absolute_url(self):
+        return reverse('adv-detail', kwargs={'pk': self.pk})
