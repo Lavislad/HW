@@ -10,6 +10,7 @@ def index(request):
     title = request.GET.get('query')
     if title:
         advertisements = Advertisement.objects.filter(title__icontains=title)
+        # advertisements = Advertisement.objects.all()
     else:
         advertisements = Advertisement.objects.all()
     context = {'advertisements': advertisements, 'title': title}
@@ -20,7 +21,7 @@ def top_sellers(request):
     context = {
         'users': users,
     }
-    return render(request, 'app_advertisments/top-sellers.html')
+    return render(request, 'app_advertisments/top-sellers.html', context)
 
 def register(request):
     return render(request, 'app_auth/register.html')
@@ -38,8 +39,20 @@ def advertisement_post(request):
     context = {'form': form}
     return render(request, 'app_advertisments/advertisement-post.html', context)
 
-def advertisement(request):
-    return render(request, 'app_advertisments/advertisement.html')
+# def advertisement(request):
+#     title = request.GET.get('query')
+#     if title:
+#         # advertisements = Advertisement.objects.filter(title__icontains=title)
+#         advertisements = Advertisement.objects.all()
+#     else:
+#         advertisements = Advertisement.objects.all()
+#     context = {'advertisements': advertisements, 'title': title}
+#     return render(request, '/app_advertisments/index.html', context)
+
+# def advertisement(request):
+#     advertisements = Advertisement.objects.all()
+#     context = {'advertisements': advertisements}
+#     return render(request, 'app_advertisments/advertisement.html', context)
 
 def login(request):
     return render(request, 'app_auth/login.html')
@@ -48,8 +61,6 @@ def profile(request):
     return render(request, 'app_auth/profile.html')
 
 def advertisement_detail(request, pk):
-    advertisement = Advertisement.objects.get(id=pk)
-    context = {
-        'advertisement': advertisement
-    }
+    advertisements = Advertisement.objects.all()
+    context = {'advertisements': advertisements}
     return render(request, 'app_advertisments/advertisement.html', context)

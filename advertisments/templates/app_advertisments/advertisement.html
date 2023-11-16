@@ -24,28 +24,28 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="top-sellers.html"><span style="font-weight: bold;">Топ продавцов</span>
+      <a class="nav-link" href="/top-sellers.html"><span style="font-weight: bold;">Топ продавцов</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="advertisement-post.html">
+      <a class="nav-link" href="/advertisement-post.html">
         <span style="font-weight: bold;">Разместить объявление</span>
       </a>
     </li>
     {% if not user.is_authenticated %}
     <li class="nav-item">
-      <a class="nav-link" href="register.html">
+      <a class="nav-link" href="/register.html">
         <span style="font-weight: bold;">Регистрация</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="login.html">
+      <a class="nav-link" href="/login.html">
         <span style="font-weight: bold;">Войти</span>
       </a>
     </li>
     {% else %}
     <li class="nav-item">
-      <a class="nav-link" href="profile.html">
+      <a class="nav-link" href="/profile.html">
         <span style="font-weight: bold;">Профиль</span>
       </a>
     </li>
@@ -56,10 +56,10 @@
     </li>
     {% endif %}
   </ul>
-
+  {% for adv in advertisements %}
   <div class="container" style="margin: 50px;">
     <div class="display-2">
-      <span class="badge bg-primary">Объявление пользователя "username"</span>
+      <span class="badge bg-primary">Объявление пользователя {{ adv.user }}</span>
     </div>
   </div>
   <div class="col offset-2">
@@ -67,7 +67,7 @@
       <div class="row g-0">
         <div class="col-md-4">
           <a href="#" class="nav-link">
-            <img src="{% static 'img/adv.png' %}" class="img-fluid rounded-start" alt="Card title">
+            <img src="{% if adv.image.url %}{{ adv.image.url }}{% endif %}" class="img-fluid rounded-start" alt="Card title">
           </a>
         </div>
         <div class="col">
@@ -78,13 +78,14 @@
             <p class="card-text">
               {{ adv.description }}
             </p>
-            <span>Автор: "username"</span>
-            <p class="card-text"><small class="text-muted">Размещено: "дата"</small></p>
+            <span>Автор: {{ adv.user }}</span>
+            <p class="card-text"><small class="text-muted">Размещено: {{ adv.created_at }}</small></p>
           </div>
         </div>
       </div>
     </div>
   </div>
+  {% endfor %}
   <footer style="padding: 100px; min-height: 300px;" class="bg-primary">
     <nav class="navbar navbar-expand-sm navbar-dark">
       <a class="navbar-brand" href="#">Добавьте</a>

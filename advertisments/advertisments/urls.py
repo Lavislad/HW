@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('myauth/', include('app_auth.urls')),
+    path('my_auth/', include('app_auth.urls')), #myauth
     #Переход в файл за строками
     path('', include('app_advertisments.urls')),
 ]
